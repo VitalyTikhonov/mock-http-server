@@ -1,4 +1,3 @@
-const { on } = require('events');
 const http = require('http');
 
 const server = http.createServer();
@@ -6,7 +5,6 @@ const server = http.createServer();
 server.on('request', (request, response) => {
   if (request.method === 'POST' && request.url === '/time_tracking') {
     let data = '';
-    let dataParsed = '';
     let count = 0;
 
     request.on('data', (chunk) => {
@@ -16,8 +14,6 @@ server.on('request', (request, response) => {
 
     request.on('end', () => {
       if (data) {
-        dataParsed = JSON.parse(data.toString());
-        // console.log('dataParsed'.toUpperCase(), 'typeof', (typeof dataParsed).toUpperCase(), dataParsed);
         response.setHeader('Content-Type', 'application/json');
         response.write(data);
         response.end();
@@ -45,8 +41,9 @@ server.on('request', (request, response) => {
 });
 
 server
-  .listen(3000, (error) => {
-    if (error) { // Не срабатывает при запуске второго процесса на том же порту, почему - пока непонятно
+  .listen(8080, (error) => {
+    if (error) {
+      // Не срабатывает при запуске второго процесса на том же порту, почему - пока непонятно
       console.log(`Из колбека listen: ${error}`);
     } else {
       console.log('Сервер запущен');
