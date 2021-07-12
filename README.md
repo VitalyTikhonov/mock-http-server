@@ -1,1 +1,9 @@
-# mock-http-server
+В запросе:
+
+{
+    "date": "11.07.2021",
+    "start_time": "14:07",
+    "end_time": "14:07",
+    "task": "GIOX_работа",
+    "notes": "разработка http-сервера"
+}
